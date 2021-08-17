@@ -11,9 +11,8 @@ import (
 )
 
 const (
-	// replace your_app_key and your_secret_key with yours
-	appKey    = "your_app_key"
-	secretKey = "your_secret_key"
+	apiKey    = "your_baidu_app_key"
+	secretKey = "your_baidu_secret_key"
 
 	groupID = "mygroup"
 )
@@ -27,11 +26,11 @@ func main() {
 	imgf := os.Args[1]
 	img, err := ioutil.ReadFile(imgf)
 	if err != nil {
-		fmt.Printf("failed to read image file: %v, error: %v\n", imgf, err)
+		log.Printf("failed to read image file: %v, error: %v\n", imgf, err)
 		os.Exit(1)
 	}
 
-	auth := oauth.NewBaiduOauth(appKey, secretKey, oauth.NewCacheImp())
+	auth := oauth.NewBaiduOauth(apiKey, secretKey, oauth.NewCacheImp())
 	f := face.NewBaiduFace(auth, groupID)
 	name, err := f.Recognize(img)
 	if err != nil {
